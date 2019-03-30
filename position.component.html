@@ -1,0 +1,51 @@
+<div class="center">
+  <h2>Position: {{position.PositionName}}</h2>
+  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non odio sed eros tristique bibendum.</p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" >
+        <div class="row">
+          <div class="col-md-12">
+            <div [class]="PositionName.errors ? 'form-group has-error' : 'form-group'">
+              <label for="PositionName" class="control-label">Position Name:</label>
+              <input class="form-control" id="PositionName" type="text" name="PositionName" #PositionName="ngModel" [(ngModel)]="position.PositionName" required/>
+              <div *ngIf="PositionName.errors && PositionName.errors.required">
+                <span class="help-block">Position is required</span>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div [class]="PositionDescription.errors ? 'form-group has-error' : 'form-group'">
+              <label for="PositionDescription" class="control-label">Description:</label>
+              <textarea class="form-control" id="PositionDescription" rows="5" name="PositionDescription" #PositionDescription="ngModel" [(ngModel)]="position.PositionDescription" required></textarea>
+              <div *ngIf="PositionDescription.errors && PositionDescription.errors.required">
+                <span class="help-block">Position Description is required</span>
+               </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <a routerLink="/positions" class="btn btn-warning pull-left">Return to Position List</a>
+        <input type="submit" class="btn btn-primary pull-right" value="Update Position" [disabled]="!f.valid"/>
+        <br />
+        <br />
+      </form>
+    </div>
+  </div>
+<br />
+<div *ngIf="successMessage">
+<div class="alert alert-success">
+  <strong>Success!</strong> Position: {{position.PositionName}} was successfully saved.
+</div>
+</div>
+<div *ngIf="failMessage">
+<div class="alert alert-danger">
+  <strong>Error!</strong> Position: {{position.PositionName}} could not be saved.
+</div>
+</div>
+</div>
+<br /><br />
